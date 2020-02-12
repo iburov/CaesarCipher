@@ -2,10 +2,14 @@ a {
   color: #cd9bff;
 }
 
+a:hover {
+  color: #ead5ff;
+}
+
 .nav,
 .footer {
   background-color: #400080;
-  color: #ffff00;
+  color: #fff;
 }
 
 .navlogo {
@@ -13,8 +17,42 @@ a {
   padding-top: 1em;
 }
 
+.test {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .main {
   background-color: #d2caff;
   padding: 1em;
+}
+
+input {
+  width: 100%;
+}
+
+.shift {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.btn {
+  background-color: #400080;
+  border: 4px solid #fff;
+  color: #fff;
+}
+
+.btn:hover {
+  background-color: #fff;
+  border: 4px solid #400080;
+  color: #400080;
 }
 /*# sourceMappingURL=style.css.map */
