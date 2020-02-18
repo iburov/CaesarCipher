@@ -1,3 +1,4 @@
+<!-- INDEX PAGE THAT INCLUDES ALL THE NECESSARY ELEMENTS OF THE PAGE (NAV, MAIN, FOOTER) -->
 <?php
 session_start();
 ?>
@@ -17,6 +18,7 @@ session_start();
     <?php
     include 'nav.php';
     
+    // Script that determines the url and updates the main content only. My PHP version of SPA
     $url_arr = [];
     parse_str($_SERVER['QUERY_STRING'], $url_arr);
     reset($url_arr);
@@ -32,7 +34,7 @@ session_start();
             break;
     }
 
-    echo '<div class="main">';
+    echo '<div class="main row">';
     include $page_dir;
     echo '</div>';
     

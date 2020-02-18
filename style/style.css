@@ -1,9 +1,24 @@
+* {
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  background-color: #d2caff;
+}
+
+.nav,
+body,
+.footer {
+  min-width: 278px;
+  overflow-x: hidden;
+}
+
 a {
   color: #cd9bff;
 }
 
 a:hover {
-  color: #ead5ff;
+  color: #ffff00;
 }
 
 .nav,
@@ -12,12 +27,16 @@ a:hover {
   color: #fff;
 }
 
+.nav {
+  height: 8em;
+}
+
 .navlogo {
   height: 8em;
   padding-top: 1em;
 }
 
-.test {
+.center {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,8 +49,9 @@ a:hover {
 }
 
 .main {
-  background-color: #d2caff;
   padding: 1em;
+  margin-top: 8em;
+  margin-bottom: 4em;
 }
 
 .text_input {
@@ -55,5 +75,25 @@ a:hover {
   background-color: #fff;
   border: 4px solid #400080;
   color: #400080;
+}
+
+textarea {
+  resize: none;
+  height: 8em;
+  width: 100%;
+}
+
+.results {
+  border: 1px solid #000;
+  background-color: #cd9bff;
+  padding: 1em 0.5em;
+  border-radius: 1em;
+}
+
+.error {
+  margin: 0 1em;
+  padding: 0 1em;
+  color: black;
+  background-color: yellow;
 }
 /*# sourceMappingURL=style.css.map */
