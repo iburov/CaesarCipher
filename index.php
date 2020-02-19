@@ -29,6 +29,9 @@ session_start();
         case '':
             $page_dir = 'main.php';
             break;
+        case 'controller':
+            $page_dir = 'controller.php';
+            break;
         default:
             $page_dir = 'error_404.php';
             break;

@@ -51,26 +51,30 @@ function encrypt($message) {
             echo '<form action="index.php" method="post" id="form">';
 
             // generates multiple ciphers
-            $multiple_results = '';
+            $multiple_results = array();
             for($i=1; $i<26; $i++) {
                 $shift = $i;
-                $multiple_results .= $shift . '. ' . caesarCipher($shift, $message) .'<br>';
+                array_push($multiple_results, $shift . ': ' . caesarCipher($shift, $message));
             }
             
-            echo '<input type="hidden" name="result" value="' . $multiple_results . '">';
+            foreach($multiple_results as $result) {
+                echo '<input type="hidden" name="result[]" value="<b>' . $result . '<>">';
+            }
 
             if(isset($_POST['message'])) {
                 echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';
             }
+
             if(isset($_POST['shift'])) {
                 echo '<input type="hidden" name="shift" value="' . $_POST['shift'] . '">';
             }
+            
             echo '</form>';
             submit();
         } else {
             $shift = $_POST['shift'];
             echo '<form action="index.php" method="post" id="form">';
-            echo '<input type="hidden" name="result" value="' . $shift . '. ' . caesarCipher($shift, $message) . '">';
+            echo '<input type="hidden" name="result[]" value="<b>' . $shift . ': ' . caesarCipher($shift, $message) . '</b>">';
             if(isset($_POST['message'])) {
                 echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';
             }
@@ -87,8 +91,43 @@ function encrypt($message) {
 
 
 // algorith used to decrypt a message
-function decrypt() {
+function decrypt($message) {
+    $json = file_get_contents('node_modules\an-array-of-english-words\index.json');
+    $json_arr = json_decode($json, true);
 
+    $multiple_results = array();
+    for($i=1; $i<26; $i++) {
+        $shift = $i;
+        array_push($multiple_results, (($shift-26)*-1) . ': ' . caesarCipher($shift, $message));
+    }
+
+    $count = 0;
+    $count_arr = array();
+    for($j=0; $j<count($multiple_results); $j++) {
+        for($k=0; $k<count($json_arr); $k++) {
+            if(strpos($multiple_results[$j], $json_arr[$k])!==false) {
+                $count++;
+            }
+        }
+        array_push($count_arr, array($count, $multiple_results[$j]));
+        $count = 0;
+    }
+
+    sort($count_arr);
+    $count_arr = array_reverse($count_arr);
+
+    echo '<form action="index.php" method="post" id="form">';
+    foreach($count_arr as $result) {
+        echo '<input type="hidden" name="result[]" value="<b>' . $result[1] . '</b><br> Words found:' . $result[0] . '">';
+    }
+    if(isset($_POST['message'])) {
+        echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';
+    }
+    if(isset($_POST['shift'])) {
+        echo '<input type="hidden" name="shift" value="' . $_POST['shift'] . '">';
+    }
+    echo '</form>';
+    submit();
 }
 
 if(isset($_POST['message'])) {
