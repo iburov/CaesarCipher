@@ -123,9 +123,6 @@ function decrypt($message) {
     if(isset($_POST['message'])) {
         echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';
     }
-    if(isset($_POST['shift'])) {
-        echo '<input type="hidden" name="shift" value="' . $_POST['shift'] . '">';
-    }
     echo '</form>';
     submit();
 }
