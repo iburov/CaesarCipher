@@ -1,3 +1,4 @@
+<!-- MAIN VIEW DIV -->
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <h1>Caesar cipher</h1>
 

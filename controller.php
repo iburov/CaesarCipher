@@ -56,7 +56,7 @@ function encrypt($message) {
                 $shift = $i;
                 array_push($multiple_results, $shift . ': ' . caesarCipher($shift, $message));
             }
-            
+            //multiple inputs generated to send an array to the view
             foreach($multiple_results as $result) {
                 echo '<input type="hidden" name="result[]" value="<b>' . $result . '<>">';
             }
@@ -72,6 +72,7 @@ function encrypt($message) {
             echo '</form>';
             submit();
         } else {
+            //generates cipher based on specified shift
             $shift = $_POST['shift'];
             echo '<form action="index.php" method="post" id="form">';
             echo '<input type="hidden" name="result[]" value="<b>' . $shift . ': ' . caesarCipher($shift, $message) . '</b>">';
@@ -117,6 +118,7 @@ function decrypt($message) {
     $count_arr = array_reverse($count_arr);
 
     echo '<form action="index.php" method="post" id="form">';
+    //multiple inputs generated to send an array to the view
     foreach($count_arr as $result) {
         echo '<input type="hidden" name="result[]" value="<b>' . $result[1] . '</b><br> Words found:' . $result[0] . '">';
     }
@@ -127,6 +129,7 @@ function decrypt($message) {
     submit();
 }
 
+//general validations
 if(isset($_POST['message'])) {
     if($_POST['message']!='') {
         $message = $_POST['message'];
