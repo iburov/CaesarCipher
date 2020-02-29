@@ -1,3 +1,6 @@
+// These are some kind of test that check
+// if correct elements are displayed and
+// that there is the correct number of results during decryption and ecryption without the shift
 $(document).ready(function() {
   if ($(".results").css("display") == "none") {
     console.log("results not showing");
@@ -20,7 +23,14 @@ $(document).ready(function() {
     }
 
     if (messageSet && !shiftSet) {
-      console.log($(".results .result_unit").length);
+      if ($(".results .result_unit").length == 25) {
+        console.log("Correct number of results");
+      } else {
+        console.log(
+          "Incorrect number of results - TEST FAILED" +
+            $(".results .result_unit").length
+        );
+      }
     }
   }
 });

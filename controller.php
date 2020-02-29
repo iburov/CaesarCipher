@@ -58,7 +58,7 @@ function encrypt($message) {
             }
             //multiple inputs generated to send an array to the view
             foreach($multiple_results as $result) {
-                echo '<input type="hidden" name="result[]" value="<b>' . $result . '">';
+                echo '<input type="hidden" name="result[]" value="<div class=\'result_unit\'>' . $result . '</div>">';
             }
 
             if(isset($_POST['message'])) {
@@ -124,7 +124,7 @@ function decrypt($message) {
     echo '<form action="index.php" method="post" id="form">';
     //multiple inputs generated to send an array to the view
     foreach($count_arr as $result) {
-        echo '<input type="hidden" name="result[]" value="<div class=\'result_unit\'><b>' . $result[1] . '</b><br> Words found:' . $result[0] . '"></div>';
+        echo '<input type="hidden" name="result[]" value="<div class=\'result_unit\'><b>' . $result[1] . '</b><br> Words found:' . $result[0] . '</div>">';
     }
     if(isset($_POST['message'])) {
         echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';
