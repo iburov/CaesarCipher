@@ -9,7 +9,7 @@ function submit() {
     <?php
 }
 
-// function used to send an error message back to the view
+// function used to send an error message and sticky data back to the view
 function error($message) {
     echo '<form action="index.php" method="post" id="form">';
     echo '<input type="hidden" name="error" value="' . $message . '">';
@@ -58,7 +58,7 @@ function encrypt($message) {
             }
             //multiple inputs generated to send an array to the view
             foreach($multiple_results as $result) {
-                echo '<input type="hidden" name="result[]" value="<b>' . $result . '<>">';
+                echo '<input type="hidden" name="result[]" value="<b>' . $result . '">';
             }
 
             if(isset($_POST['message'])) {
@@ -75,7 +75,7 @@ function encrypt($message) {
             //generates cipher based on specified shift
             $shift = $_POST['shift'];
             echo '<form action="index.php" method="post" id="form">';
-            echo '<input type="hidden" name="result[]" value="<b>' . $shift . ': ' . caesarCipher($shift, $message) . '</b>">';
+            echo '<input type="hidden" name="result[]" value="<div class=\'result_unit\'><b>' . $shift . ': ' . caesarCipher($shift, $message) . '</b></div>">';
             if(isset($_POST['message'])) {
                 echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';
             }
@@ -93,15 +93,18 @@ function encrypt($message) {
 
 // algorith used to decrypt a message
 function decrypt($message) {
+    // get json array of english words
     $json = file_get_contents('node_modules\an-array-of-english-words\index.json');
     $json_arr = json_decode($json, true);
 
+    // generate array of all possible decrypted messages
     $multiple_results = array();
     for($i=1; $i<26; $i++) {
         $shift = $i;
         array_push($multiple_results, (($shift-26)*-1) . ': ' . caesarCipher($shift, $message));
     }
 
+    // assign word count as key for every version of decrypted message
     $count = 0;
     $count_arr = array();
     for($j=0; $j<count($multiple_results); $j++) {
@@ -114,13 +117,14 @@ function decrypt($message) {
         $count = 0;
     }
 
+    // sort the array of decryped messages descending number of words
     sort($count_arr);
     $count_arr = array_reverse($count_arr);
 
     echo '<form action="index.php" method="post" id="form">';
     //multiple inputs generated to send an array to the view
     foreach($count_arr as $result) {
-        echo '<input type="hidden" name="result[]" value="<b>' . $result[1] . '</b><br> Words found:' . $result[0] . '">';
+        echo '<input type="hidden" name="result[]" value="<div class=\'result_unit\'><b>' . $result[1] . '</b><br> Words found:' . $result[0] . '"></div>';
     }
     if(isset($_POST['message'])) {
         echo '<input type="hidden" name="message" value="' . $_POST['message'] . '">';

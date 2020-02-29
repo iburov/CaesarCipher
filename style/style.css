@@ -1,5 +1,5 @@
 * {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Acme", "Times New Roman", Times, serif;
 }
 
 body {
@@ -56,12 +56,6 @@ a:hover {
 
 .text_input {
   width: 100%;
-}
-
-.shift {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .btn {
